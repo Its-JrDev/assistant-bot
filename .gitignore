@@ -1,12 +1,5 @@
-# Entorno virtual
 venv/
-
-# Bases de datos locales
-*.db
-
-# Archivos temporales de Python
 __pycache__/
 *.pyc
-
-# Logs
+*.sqlite3
 *.log
