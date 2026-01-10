@@ -22,7 +22,7 @@ def ask_ai(message: Any) -> str:
     if lower.startswith("hola") or "hola" in lower:
         return "¡Hola! ¿En qué puedo ayudarte hoy?"
     if "horario" in lower:
-        return "Puedes consultar los horarios en la sección correspondiente o pedir que te muestre el horario de tu curso."
+        return "Puedes consultar los horarios con el comando /horario o pedir que te muestre el horario de tu curso."
     if "tarea" in lower or "tareas" in lower:
         return "Para ver tus tareas usa /tareas o pregunta por la tarea específica indicando la materia."
     if text.startswith("/"):

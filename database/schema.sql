@@ -24,10 +24,10 @@ CREATE TABLE IF NOT EXISTS horarios (
 -- Tabla de eventos
 CREATE TABLE IF NOT EXISTS eventos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    titulo TEXT NOT NULL,
-    descripcion TEXT NOT NULL,
-    curso_destino TEXT NOT NULL,
-    fecha TEXT NOT NULL
+    curso TEXT NOT NULL,
+    evento TEXT NOT NULL,
+    fecha TEXT NOT NULL,
+    descripcion TEXT NOT NULL
 );
 
 -- Tabla de tareas
@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS tareas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     curso TEXT NOT NULL,
     materia TEXT NOT NULL,
+    titulo TEXT NOT NULL,
     descripcion TEXT NOT NULL,
     fecha_entrega TEXT NOT NULL
 );
