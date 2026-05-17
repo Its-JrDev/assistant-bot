@@ -98,11 +98,11 @@ Crear el panel web de administración escolar con SvelteKit + Shadcn-Svelte. Log
 
 ```bash
 cd frontend
-npm create svelte@latest . -- --template minimal
-npx svelte-add@latest tailwindcss
-npm install bits-ui lucide-svelte
-npx shadcn-svelte@latest init
-npx shadcn-svelte@latest add button card input table dialog select
+pnpm create svelte@latest . -- --template minimal
+pnpm add -D tailwindcss @tailwindcss/vite
+pnpm add bits-ui lucide-svelte
+pnpm dlx shadcn-svelte@latest init
+pnpm dlx shadcn-svelte@latest add button card input table dialog select
 ```
 
 ### Qué crear
@@ -145,8 +145,8 @@ POST  /api/tasks/         → {course, subject, title, description, due_date}
 
 ```bash
 cd frontend
-npm install
-npm run dev  # http://localhost:5173
+pnpm install
+pnpm dev  # http://localhost:5173
 ```
 
 Backend debe estar corriendo en `http://localhost:8000` (o configurar VITE_API_URL).

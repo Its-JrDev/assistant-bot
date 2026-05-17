@@ -36,7 +36,7 @@ TELEGRAM_BOT_TOKEN=tu-token python manage.py run_bot
 # 5. Frontend (otra terminal)
 cd frontend
 pnpm install
-pnpm run dev
+pnpm dev
 ```
 
 ### Comandos del bot
