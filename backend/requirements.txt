@@ -1,0 +1,21 @@
+django>=5.0,<6.1
+djangorestframework>=3.15,<3.18
+djangorestframework-simplejwt>=5.3,<5.6
+django-cors-headers>=4.3,<5.0
+
+# Bot
+pyTelegramBotAPI>=4.29,<5.0
+
+# AI
+openai>=2.9,<3.0
+
+# Data
+pandas>=2.3,<3.0
+openpyxl>=3.1,<4.0
+python-dateutil>=2.9,<3.0
+pytz>=2025,<2026
+requests>=2.32,<3.0
+
+# Production
+psycopg2-binary>=2.9,<3.0
+gunicorn>=23.0,<24.0
