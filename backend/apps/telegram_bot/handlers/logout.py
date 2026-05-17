@@ -1,17 +1,14 @@
-from database.db import logout_user
 from telegram_bot.services.session_service import get_user_by_telegram
 
 
 def logout(msg, bot):
-    user = get_user_by_telegram(msg.from_user.id)
-    if not user or user[3] != 1:
+    student = get_user_by_telegram(msg.from_user.id)
+    if not student:
         bot.reply_to(msg, 'ℹ️ No tienes una sesión activa.')
         return
-    success = logout_user(msg.from_user.id)
-    if success:
-        bot.reply_to(msg, '🔓 Has cerrado sesión correctamente.')
-    else:
-        bot.reply_to(msg, '❌ Ocurrió un error al cerrar sesión.')
+    student.telegram_id = None
+    student.save()
+    bot.reply_to(msg, '🔓 Has cerrado sesión correctamente.')
 
 
 def register_handlers(bot):
