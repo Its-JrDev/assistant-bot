@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 # Setup Django
-sys.path.insert(0, str(Path(__file__).parent / 'backend'))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'backend'))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.dev')
 
 import django
