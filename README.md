@@ -39,6 +39,20 @@ pnpm install
 pnpm run dev
 ```
 
+### Comandos del bot
+
+| Comando | Descripción |
+|---|---|
+| `/start` | Mensaje de bienvenida |
+| `/login` | Iniciar sesión con DNI + PIN |
+| `/logout` | Cerrar sesión |
+| `/horario` | Ver horario semanal del curso |
+| `/tareas` | Listar tareas pendientes del curso |
+| `/eventos` | Listar próximos eventos del curso |
+| `/notas` | Ver tus notas por materia y período |
+
+> Cualquier otro mensaje se envía al asistente IA (requiere `OPENAI_API_KEY` configurada).
+
 ### Usuarios seed
 
 | Usuario | Contraseña | Rol |

@@ -1,9 +1,8 @@
-from database.db import query
+from students.models import Student
 
 
 def get_user_by_telegram(tid):
-    rows = query(
-        'SELECT id, nombre, curso, logged FROM estudiantes WHERE telegram_id=?',
-        (tid,)
-    )
-    return rows[0] if rows else None
+    try:
+        return Student.objects.get(telegram_id=tid)
+    except Student.DoesNotExist:
+        return None

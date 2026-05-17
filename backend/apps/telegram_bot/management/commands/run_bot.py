@@ -7,6 +7,9 @@ from django.core.management.base import BaseCommand
 from telegram_bot.handlers.login import register_handlers as register_login
 from telegram_bot.handlers.logout import register_handlers as register_logout
 from telegram_bot.handlers.schedules import format_schedule, get_schedule
+from telegram_bot.handlers.tasks import format_tasks, get_tasks
+from telegram_bot.handlers.events import format_events, get_events
+from telegram_bot.handlers.notas import format_grades, get_grades
 from telegram_bot.handlers.ai import ask_ai
 from telegram_bot.services.session_service import get_user_by_telegram
 
@@ -31,28 +34,58 @@ class Command(BaseCommand):
 
         @bot.message_handler(commands=['horario'])
         def horario_handler(message):
-            user = get_user_by_telegram(message.from_user.id)
-            if not user:
+            student = get_user_by_telegram(message.from_user.id)
+            if not student:
                 bot.reply_to(message, '🔒 Necesitas iniciar sesión con /login para ver tu horario.')
                 return
-            if user[3] != 1:
-                bot.reply_to(message, '🔒 Tu sesión no está activa. Usa /login.')
+            if not student.course:
+                bot.reply_to(message, '⚠️ No estás asignado a ningún curso.')
                 return
-            rows = get_schedule(user[2])
+            rows = get_schedule(student.course)
             bot.reply_to(message, format_schedule(rows), parse_mode='Markdown')
+
+        @bot.message_handler(commands=['tareas'])
+        def tareas_handler(message):
+            student = get_user_by_telegram(message.from_user.id)
+            if not student:
+                bot.reply_to(message, '🔒 Necesitas iniciar sesión con /login para ver tus tareas.')
+                return
+            if not student.course:
+                bot.reply_to(message, '⚠️ No estás asignado a ningún curso.')
+                return
+            rows = get_tasks(student.course)
+            bot.reply_to(message, format_tasks(rows), parse_mode='Markdown')
+
+        @bot.message_handler(commands=['eventos'])
+        def eventos_handler(message):
+            student = get_user_by_telegram(message.from_user.id)
+            if not student:
+                bot.reply_to(message, '🔒 Necesitas iniciar sesión con /login para ver los eventos.')
+                return
+            if not student.course:
+                bot.reply_to(message, '⚠️ No estás asignado a ningún curso.')
+                return
+            rows = get_events(student.course)
+            bot.reply_to(message, format_events(rows), parse_mode='Markdown')
+
+        @bot.message_handler(commands=['notas'])
+        def notas_handler(message):
+            student = get_user_by_telegram(message.from_user.id)
+            if not student:
+                bot.reply_to(message, '🔒 Necesitas iniciar sesión con /login para ver tus notas.')
+                return
+            rows = get_grades(student)
+            bot.reply_to(message, format_grades(rows), parse_mode='Markdown')
 
         @bot.message_handler(func=lambda msg: True)
         def main_handler(message):
             if message.text.startswith('/') or message.text.isdigit():
                 return
-            user = get_user_by_telegram(message.from_user.id)
-            if not user:
+            student = get_user_by_telegram(message.from_user.id)
+            if not student:
                 bot.reply_to(message, '🔒 Necesitas iniciar sesión con /login para usar el asistente.')
                 return
-            if user[3] != 1:
-                bot.reply_to(message, '🔒 Tu sesión no está activa. Usa /login.')
-                return
-            response = ask_ai(message)
+            response = ask_ai(message, student=student)
             bot.reply_to(message, response)
 
         self.stdout.write('Bot started polling...')
