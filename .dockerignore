@@ -1,0 +1,9 @@
+.venv
+venv
+**/node_modules
+.git
+__pycache__
+*.pyc
+.env
+*.sqlite3
+**/*.pyc
