@@ -2,11 +2,13 @@ FROM node:22-alpine AS build
 
 WORKDIR /app
 
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+COPY frontend/pnpm-lock.yaml frontend/package.json ./
+RUN pnpm install --frozen-lockfile
 
 COPY frontend/ .
-RUN npm run build
+RUN pnpm build
 
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
