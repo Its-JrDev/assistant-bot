@@ -63,9 +63,12 @@ docker/          → Dockerfiles + nginx
 docs/            → Documentación
 ```
 
-## Fases
+## Worktrees (F2 paralelo)
 
-- `develop` — integración
-- `feat/backend-api` — endpoints y permisos
-- `feat/frontend-svelte` — UI del panel
-- `feat/bot-refactor` — comandos del bot con ORM
+```bash
+git worktree add ../assistant-bot-backend  feat/backend-api
+git worktree add ../assistant-bot-frontend feat/frontend-svelte
+git worktree add ../assistant-bot-bot      feat/bot-refactor
+```
+
+Ver `AGENTS.md` para instrucciones detalladas de cada worktree.
